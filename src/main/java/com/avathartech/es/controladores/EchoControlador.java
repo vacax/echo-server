@@ -35,7 +35,7 @@ public class EchoControlador {
         }
 
         //Almancenando en la base de datos.
-        ctx.json(TramaServices.getInstancia().guardarJson(cuerpoMensaje));
+        ctx.json(TramaServices.getInstancia().guardarJson(cuerpoMensaje, usuario));
 
         //Mostrando a los usuarios la información recibida.
         Main.enviarMensajeSubcriptores(Utilidades.formatearJson(cuerpoMensaje));
