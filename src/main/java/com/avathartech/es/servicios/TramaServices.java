@@ -1,5 +1,6 @@
 package com.avathartech.es.servicios;
 
+import com.avathartech.es.entidades.Usuario;
 import com.avathartech.es.utils.DatosEstaticos;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -25,7 +26,7 @@ public class TramaServices {
      * Permite almacena un JSON en MongoDB.
      * @param jsonString
      */
-    public String guardarJson(String jsonString) {
+    public String guardarJson(String jsonString, Usuario usuario) {
         try {
             // Validar que sea un JSON válido primero
             Gson gson = new Gson();
@@ -33,7 +34,8 @@ public class TramaServices {
 
             // Convertir el JSON a Document de MongoDB
             Document document = Document.parse(jsonString);
-            document.computeIfAbsent("date_create", k -> new java.util.Date());
+            document.computeIfAbsent("_fecha_creacion", k -> new java.util.Date());
+            document.computeIfAbsent("_creado_por", k -> usuario.getUsername());
 
             // Obtener la base de datos y la colección
             MongoCollection<Document> collection = MongoDbConexion.getBaseDatos().getCollection(DatosEstaticos.TRAMA.getValor());
