@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group = 'com.avathartech'
@@ -12,6 +13,8 @@ repositories {
         url 'https://oss.sonatype.org/content/repositories/snapshots'
     }
 }
+
+mainClassName="com.avathartech.es.Main"
 
 run{
     mainClass.set("com.avathartech.es.Main")
@@ -47,4 +50,10 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+shadowJar{
+    archiveBaseName.set("echo-server")
+    archiveClassifier.set('')
+    archiveVersion.set('')
 }

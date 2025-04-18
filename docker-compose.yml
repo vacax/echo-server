@@ -9,6 +9,8 @@ services:
         max-size: 50m
     env_file:
       - stack.env
+    ports:
+      - '${PORT}:7000'
 
 networks:
   default:
