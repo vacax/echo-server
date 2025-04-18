@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Servidor Echo</title>
+    <script src="https://unpkg.com/htmx.org@2.0.1" integrity="sha384-QWGpdj554B4ETpJJC9z+ZHJcA/i59TyjxEPXiiUgN2WmTyV5OEZWCD6gQhgkdpB/" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx-ext-ws@2.0.0/ws.js"></script>
+    <script>
+        htmx.config.wsReconnectDelay = function (retryCount) {
+    return retryCount * 1000 // return value in milliseconds
+     }
+    </script>
+    <style>
+        table, th, td {
+  border: 1px solid black;
+    }
+    </style>
+</head>
+<body>
+<h1>Servidor ECHO</h1>
+<p>
+    Proyecto que permite visualizar las tramas recibidas mediante los endpoint disponibles.
+    Es necesario disponer de un token de seguridad para poder acceder a los endpoint.
+    Ver ejemplo de uso mediante curl:
+    <pre>
+        curl --location 'https://DIRECCION-SERVIDOR/api/echo-json' \
+        --header 'SEGURIDAD-TOKEN: indicar-su-token' \
+        --header 'Content-Type: application/json' \
+        --data '{
+        "grupo": "1",
+        "estacion": "1",
+        "fecha": "29/07/2024 11:41:00",
+        "temperatura": 25.7,
+        "humedad": 56
+        }'
+    </pre>
+</p>
+<hr/>
+<div hx-ext="ws" ws-connect="/lecturas">
+    <!-- will be appended to #notifications div -->
+    <div id="lecturas" hx-swap-oob="beforeend">
+
+    </div>
+</div>
+</body>
+</html>

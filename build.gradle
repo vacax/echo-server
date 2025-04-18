@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.avathartech'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots'
+    }
+}
+
+run{
+    mainClass.set("com.avathartech.es.Main")
+}
+
+dependencies {
+
+    //Librería de Javalin
+    implementation("io.javalin:javalin:6.6.0")
+    implementation("org.slf4j:slf4j-simple:2.0.16")
+
+    //Mongodb y Morphia
+    //implementation('dev.morphia.morphia:morphia-core:2.4.14')
+    implementation('dev.morphia.morphia:morphia-core:3.0.0-SNAPSHOT')
+    implementation("org.mongodb:mongodb-driver-sync:5.1.2")
+
+    //Implementación del render
+    implementation("io.javalin:javalin-rendering:6.6.0")
+
+    // https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf
+    implementation 'org.thymeleaf:thymeleaf:3.1.2.RELEASE'
+
+    // j2html
+    implementation("com.j2html:j2html:1.6.0")
+
+    //Manejo de JSON
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
