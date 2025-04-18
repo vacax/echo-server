@@ -2,7 +2,7 @@
 
 Muestra por pantalla la información recibida por los diferentes servicios.
 
-## Tecnologias
+## Tecnologías
 
 - Java 21
 - Javalin

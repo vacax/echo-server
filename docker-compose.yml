@@ -1,0 +1,16 @@
+services:
+  echo-server:
+    build: ./
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-file: 5
+        max-size: 50m
+    env_file:
+      - stack.env
+
+networks:
+  default:
+    external:
+      name: proxy
